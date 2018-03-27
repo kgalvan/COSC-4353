@@ -1,0 +1,17 @@
+package fibonacci;
+
+import java.math.BigInteger;
+
+public class FibonacciRecursiveSolution{
+
+    public BigInteger compute(int number){ //Venkat: position instead of number
+
+        if(number == 0)     //Venkat: if(position < 2) ...
+            return new BigInteger("1");
+        else if(number == 1)
+            return new BigInteger("1");
+        else //Venkat: no need for this line.
+            return compute(number - 2).add(compute(number - 1));
+    }
+}
+

@@ -1,0 +1,59 @@
+package guessinggame;
+
+import java.util.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.*;
+
+public class GuessingGame{
+
+    public GuessingGame(){ //Venkat: no need for this right now, may need it later.
+    } //Venkat: a blank line after this please
+    public int score(String scrambledWord, String guessWord){
+        char currentLetter;
+        boolean isValid = false;
+        int score = 0;
+
+        for (int i = 0; i < guessWord.length(); i++) {
+            currentLetter = guessWord.charAt(i);
+            isValid = false;
+            for (int j = 0; j < scrambledWord.length(); j++) {
+                if (currentLetter == scrambledWord.charAt(j)) {
+                    isValid = true;
+                }
+            }
+        }
+        if(isValid){
+            for (int i = 0; i < guessWord.length(); i++) {
+                currentLetter = (guessWord.charAt(i));
+                if (currentLetter == 'a' || currentLetter == 'e' || currentLetter == 'i' || currentLetter == 'o' || currentLetter == 'u')
+                    score+=1;
+
+                else
+                    score+=2;
+            }
+        }
+        return score;
+        
+        //Venkat: Will the below work instead of the above code?
+        /*
+        String guessLowerCase = guessWord.toLowerCase();
+        
+        Map<String, Long> frequencyOfLettersInGuess = Stream.of(guessLowerCase.split(""))
+          .collect(groupingBy(letter -> letter, counting()));
+        
+        Map<String, Long> frequencyOfLettersWord = Stream.of(scrambledWord.split(""))
+          .collect(groupingBy(letter -> letter, counting()));
+        
+        if(frequencyOfLettersInGuess.keySet().stream()
+          .filter(letter -> frequencyOfLettersInGuess.get(letter) > frequencyOfLettersWord.computeIfAbsent(letter, key -> 0L))
+          .count() > 0) return 0;
+        
+        List<String> VOWELS = List.of("a", "e", "i", "o", "u");
+        
+        return Stream.of(guessLowerCase.split(""))
+          .mapToInt(letter -> VOWELS.contains(letter) ? 1 : 2)
+          .sum();
+        */
+    }
+
+}

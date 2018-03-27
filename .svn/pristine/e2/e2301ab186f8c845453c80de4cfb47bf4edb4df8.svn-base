@@ -1,0 +1,23 @@
+package fibonacci;
+
+import java.math.BigInteger;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class FibonacciMemoizedRecursiveSolution implements FibonacciSolution {
+    Map<Integer, BigInteger> fibonacciMemo = new LinkedHashMap<>(); //Feedback: private
+
+    @Override
+    public BigInteger compute(int position) {
+        if(position < 2) {
+            return new BigInteger("1");
+        }
+        if (fibonacciMemo.containsKey(position)) {
+            return fibonacciMemo.get(position);
+        }
+        fibonacciMemo.put(position, compute(position - 1).add(compute(position - 2))); //Feedback: this part of
+        //adding is already done in the recursive solution. Let's reuse that.
+
+        return fibonacciMemo.get(position);
+    }
+}

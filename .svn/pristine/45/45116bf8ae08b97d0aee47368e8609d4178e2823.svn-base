@@ -1,0 +1,10 @@
+package fibonacci;
+
+public class FibonacciRecursiveSolutionTest extends FibonacciSolutionTest {
+
+    @Override
+    protected FibonacciRecursiveSolution createInstance() {
+        return new FibonacciRecursiveSolution();
+    }
+
+}

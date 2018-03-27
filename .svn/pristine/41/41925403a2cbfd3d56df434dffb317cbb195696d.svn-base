@@ -1,0 +1,49 @@
+package guessinggame;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class GuessingGame{
+
+    public GuessingGame(){
+
+    }
+
+    public int getScore(String scrambledWord, String guessWord){
+        String consOrVowel;
+        int score = 0;
+
+        for (int i = 0; i < guessWord.length(); i++) {
+            consOrVowel = consonantOrVowel(guessWord.charAt(i));
+            if (!letterNotInWord(scrambledWord, guessWord.charAt(i))) {
+                if (consOrVowel == "consonant") {
+                    score += 1;
+                } else if (consOrVowel == "vowel"){
+                    score += 2;
+                }
+            }
+
+        }
+        return score;
+    }
+
+    public String consonantOrVowel (char letter) {
+        String letterStatus;
+        if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u') {
+            letterStatus = "vowel";
+        }
+        else {
+            letterStatus = "consonant";
+        }
+        return letterStatus;
+    }
+    public boolean letterNotInWord (String scrambledWord, char guessWordLetter) {
+        for (int i = 0; i < scrambledWord.length(); i++) {
+            if(guessWordLetter == scrambledWord.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+}

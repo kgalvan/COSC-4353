@@ -1,0 +1,21 @@
+package mastermind;
+import java.util.*;
+
+public class MasterMind {
+    public String win() {
+        return "none";
+    }
+    public static int[] generateSolution(){
+        return new int[6];
+    }
+    public static boolean compare (int userArray[], int gameArray[]) {
+        boolean allSame = true;
+        for (int x = 0; x < 6; x++) {
+            if (userArray[x] != gameArray[x]) {
+                allSame = false;
+            }
+        }
+        return allSame;
+    }
+
+}

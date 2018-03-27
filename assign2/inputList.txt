@@ -1,0 +1,10 @@
+monkey
+planet
+water
+horse
+animal
+television
+giraffe
+night
+day
+hello

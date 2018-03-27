@@ -1,0 +1,33 @@
+package fibonacci;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class FibonacciIterativeSolutionTest extends FibonacciSolutionTest<FibonacciIterativeSolution>{
+    private FibonacciIterativeSolution fibonacciIterativeSolution;
+
+    @Override
+    protected FibonacciIterativeSolution createInstance() {
+        return new FibonacciIterativeSolution();
+    }
+
+     @BeforeEach
+     void init(){
+         fibonacciIterativeSolution = new FibonacciIterativeSolution();
+     }
+
+    @Test
+    void fibIterative50(){
+                         //Venkat: Let's not use any string in this test
+        assertEquals("20365011074", String.valueOf(fibonacciIterativeSolution.compute(50)));
+    }
+
+    @Test
+    void simpleIterationForPosition300(){
+        assertEquals("359579325206583560961765665172189099052367214309267232255589801",
+            String.valueOf(fibonacciIterativeSolution.compute(300)));
+    }
+
+
+}

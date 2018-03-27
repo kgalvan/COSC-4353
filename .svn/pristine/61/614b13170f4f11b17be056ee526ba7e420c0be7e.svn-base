@@ -1,0 +1,85 @@
+package mastermind;
+
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.stream.IntStream;
+
+//Venkat: 
+//import java.util.stream.IntStream;
+//import java.util.function.IntFunction;
+//import java.util.function.Function;
+//import static java.util.stream.Collectors.groupingBy;
+//import static java.util.stream.Collectors.counting;
+
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+import static mastermind.MasterMind.Response.*;
+
+public class MasterMind {
+    public int attempts = 20;
+    public String winner = "none";
+    public boolean gameDone = false;
+    enum Response{ NO_MATCH, MATCH, POSITIONAL_MATCH }
+
+    private final int SIZE = 6;
+    
+    private List<Color> solution;
+
+    public MasterMind()
+    {
+        for(int x = 0; x < 6; x++)
+            generateRandomColors();
+    }
+
+    public MasterMind(List<Color> selection) {
+        solution = selection;
+    }
+
+    public Map<Response,Long> guess(List<Color> userGuess) {
+        IntFunction<Response> computeMatchAtPosition = index ->
+          solution.get(index) == userGuess.get(index) ? POSITIONAL_MATCH :
+            userGuess.contains(solution.get(index)) ? MATCH : NO_MATCH;
+
+        Map<Response, Long> response =
+          IntStream.range(0, SIZE)
+            .mapToObj(computeMatchAtPosition)
+            .collect(groupingBy(Function.identity(), counting()));
+
+        response.computeIfAbsent(NO_MATCH, key -> 0L);
+        response.computeIfAbsent(MATCH, key -> 0L);
+        response.computeIfAbsent(POSITIONAL_MATCH, key -> 0L);
+
+        status(response);
+        return response;
+    }
+
+    private void status (Map<Response, Long> response) {
+        attempts--;
+
+        if (response.get(Response.POSITIONAL_MATCH) == 6 && !gameDone) {
+            winner = "Player";
+            gameDone = true;
+        }
+        else if (attempts == 0 && !gameDone) {
+            winner = "Game";
+            gameDone = true;
+        }
+        else if (gameDone) {
+            winner = "You already won";
+            attempts++;
+        }
+    }
+
+    protected Color generateRandomColors() {
+
+        Color[]allColorArray = new Color[]{Color.RED,Color.BLUE,Color.CYAN,Color.YELLOW,Color.GREEN,Color.ORANGE,Color.PINK,Color.MAGENTA,Color.BLACK,Color.GRAY};
+        Collections.shuffle(Arrays.asList(allColorArray));
+        return allColorArray[0];
+    }
+
+
+
+}

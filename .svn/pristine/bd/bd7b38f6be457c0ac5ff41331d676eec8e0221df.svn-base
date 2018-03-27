@@ -1,0 +1,90 @@
+package guessinggame;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.IOException;
+
+import static org.mockito.Mockito.*;
+
+
+public class SpellCheckerTest {
+    GuessingGame guessingGame;
+    SpellChecker spellChecker;
+
+    @BeforeEach
+    void init() {
+        spellChecker = mock(SpellChecker.class);
+        guessingGame = new GuessingGame(spellChecker);
+    }
+
+    @Test
+    void correctSpellingOfTrue(){
+        try{
+            when(spellChecker.isSpellingCorrect("true")).thenReturn(true);
+            guessingGame = new GuessingGame(spellChecker);
+            assertEquals(6,guessingGame.score("true","true"));
+        }
+        catch(IOException ex){
+        }
+    }
+    @Test
+    void correctSpellingOfMonkey(){
+        try{
+            when(spellChecker.isSpellingCorrect("monkey")).thenReturn(true);
+            guessingGame = new GuessingGame(spellChecker);
+            assertEquals(10,guessingGame.score("oekmny","monkey"));
+        }
+        catch(IOException ex){
+        }
+    }
+    @Test
+    void incorrectSpellingOfFalse(){
+        try{
+            when(spellChecker.isSpellingCorrect("false")).thenReturn(false);
+            guessingGame = new GuessingGame(spellChecker);
+            assertEquals(0,guessingGame.score("false","fasle"));
+        }
+        catch(IOException ex){
+        }
+    }
+    @Test
+    void correctSpellingOfMonk(){
+        try{
+            when(spellChecker.isSpellingCorrect("monk")).thenReturn(true);
+            guessingGame = new GuessingGame(spellChecker);
+            assertEquals(7,guessingGame.score("oekmny","monk"));
+        }
+        catch(IOException ex){
+        }
+    }
+/*
+    @Test
+    void IOExceptionTest(){
+        try{
+            when(spellChecker.isSpellingCorrect("monk")).thenThrow(new IOException("IOException"));
+            guessingGame = new GuessingGame(spellChecker);
+            assertThrows(IOException.class,()->guessingGame.score("monk","monk"));
+        }
+        catch(IOException ex){
+        }
+    }
+*/
+
+    @Test
+    void NetworkFailureTest(){
+        try{
+            when(spellChecker.isSpellingCorrect("monk")).thenThrow(new RuntimeException("Network Failure"));
+            guessingGame = new GuessingGame(spellChecker);
+            assertThrows(RuntimeException.class,()->guessingGame.score("monk","monk"));
+        }
+        catch(IOException ex){
+        }
+    }
+
+}
+
+//Then write a test for network failure
+//create a stub for SpellChecker where isSpellingCorrect throws an exception new RuntimeException("Network failure")
+//pass the stub to the constructor of GuessingGame in this test
+//call score, like assertThrows(RuntimeException.class, () -> guessingGame.scores..., "Network failure");

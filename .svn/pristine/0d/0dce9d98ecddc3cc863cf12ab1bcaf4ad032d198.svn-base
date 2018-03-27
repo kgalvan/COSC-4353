@@ -1,0 +1,8 @@
+package guessinggame;
+
+import java.io.IOException;
+
+public interface SpellChecker {
+    public boolean isSpellingCorrect(String userInput) throws IOException;
+    //Venkat: public boolean isSpellingCorrect(String word) //no throws IOException
+}

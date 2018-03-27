@@ -1,0 +1,3 @@
+cd assign1
+call gradlew.bat
+exit %ERRORLEVEL%

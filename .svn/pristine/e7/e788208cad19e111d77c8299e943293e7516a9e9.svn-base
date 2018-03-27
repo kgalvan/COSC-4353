@@ -1,0 +1,102 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.*;
+import java.util.List;
+import javax.swing.*;
+
+
+public class GuiTest {
+
+    public static void main(String[] args)
+    {
+        init();
+    }
+
+    private static void init()
+    {
+        JFrame frame = new JFrame("Game");
+        frame.setLayout(null);
+        JButton submitButton = new JButton("Submit");
+        JButton forfeitButton = new JButton("Forfeit");
+        ColorBox firstBox = new ColorBox();
+        ColorBox secondBox = new ColorBox();
+        ColorBox thirdBox = new ColorBox();
+        ColorBox fourthBox = new ColorBox();
+        ColorBox fifthBox = new ColorBox();
+        ColorBox sixthBox = new ColorBox();
+        JTextField numAttemptsLeft = new JTextField("20");
+        numAttemptsLeft.setEditable(false);
+
+        frame.setBounds(200,200,800,800);
+
+        forfeitButton.setBounds(200,600,100,100);
+        submitButton.setBounds(500,600,100,100);
+
+        firstBox.setBounds(125,200,50,50);
+        secondBox.setBounds(225,200,50,50);
+        thirdBox.setBounds(325,200,50,50);
+        fourthBox.setBounds(425,200,50,50);
+        fifthBox.setBounds(525,200,50,50);
+        sixthBox.setBounds(625,200,50,50);
+
+        numAttemptsLeft.setBounds(500,400,100,100);
+
+
+        frame.add(firstBox);
+        frame.add(secondBox);
+        frame.add(thirdBox);
+        frame.add(fourthBox);
+        frame.add(fifthBox);
+        frame.add(sixthBox);
+        frame.add(submitButton);
+        frame.add(forfeitButton);
+        frame.add(numAttemptsLeft);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+}
+class ColorBox extends JButton
+{
+    Color color;
+    public ColorBox()
+    {
+        super();
+        color = Color.WHITE;
+        setBackground(color);
+    }
+
+    public ColorBox(Color currentColor)
+    {
+        super();
+        color = currentColor;
+        setBackground(color);
+    }
+
+    public Color[] getAvailableColors()
+    {
+        Color[]allColorArray = new Color[]{Color.RED,Color.BLUE,Color.CYAN,Color.YELLOW,Color.GREEN,Color.ORANGE,Color.PINK,Color.MAGENTA,Color.BLACK,Color.GRAY};
+        return allColorArray;
+    }
+    public void changeColor()
+    { //colors alternate from the cycle shown above in that order
+        Color[] availableColors = getAvailableColors();
+
+        if(color.equals(Color.WHITE))
+            color = Color.RED;
+
+        else if(color.equals(Color.GRAY)) {
+            color = Color.RED;
+        }
+
+        else{
+            for(int x = 0; x <10; x++) {
+                if (color.equals(availableColors[x]))
+                {
+                    color = availableColors[x+1];
+                    break;
+                }
+            }
+
+        }
+    }
+}

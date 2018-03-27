@@ -1,0 +1,41 @@
+package guessinggame;
+
+import java.util.*;
+import java.util.stream.*;
+
+
+import static java.util.stream.Collectors.*;
+
+public class GuessingGame{
+
+
+
+    public int score(String scrambledWord, String guessWord){
+
+
+        String guessLowerCase = guessWord.toLowerCase();
+
+        Map<String, Long> frequencyOfLettersInGuess = Stream.of(guessLowerCase.split(""))
+          .collect(groupingBy(letter -> letter, counting()));
+
+        Map<String, Long> frequencyOfLettersWord = Stream.of(scrambledWord.split(""))
+          .collect(groupingBy(letter -> letter, counting()));
+
+        if(frequencyOfLettersInGuess.keySet().stream()
+          .filter(letter -> frequencyOfLettersInGuess.get(letter) > frequencyOfLettersWord.computeIfAbsent(letter, key -> 0L))
+          .count() > 0) return 0;
+
+        List<String> VOWELS = new ArrayList<String>();// = List.of("a", "e", "i", "o", "u");
+        VOWELS.add("a");
+        VOWELS.add("e");
+        VOWELS.add("i");
+        VOWELS.add("o");
+        VOWELS.add("u");
+
+        return Stream.of(guessLowerCase.split(""))
+          .mapToInt(letter -> VOWELS.contains(letter) ? 1 : 2)
+          .sum();
+
+    }
+
+}

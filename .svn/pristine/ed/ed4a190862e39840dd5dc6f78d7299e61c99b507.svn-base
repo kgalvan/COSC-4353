@@ -1,0 +1,55 @@
+package fibonacci;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class FibonacciTest {
+    Fibonacci fibonacci = new Fibonacci();
+/*
+    @BeforeEach
+    void init() {
+        fibonacci = new Fibonacci();
+    }
+*/
+
+    @Test
+    void fibIterative0() {
+        assertEquals(1, fibonacci.iterative(0));
+    }
+
+    @Test
+    void fibIterative1() {
+        assertEquals(1, fibonacci.iterative(1));
+    }
+
+    @Test
+    void fibIterative5() {
+        assertEquals(8, fibonacci.iterative(5));
+    }
+
+    @Test
+    void fibIterative7() {
+        assertEquals(21, fibonacci.iterative(7));
+    }
+
+    @Test
+    void fibRecursive0() {
+        assertEquals(1, fibonacci.recursive(0));
+    }
+
+    @Test
+    void fibRecursive1() {
+        assertEquals(1, fibonacci.recursive(1));
+    }
+
+    @Test
+    void fibRecursive5() {
+        assertEquals(8, fibonacci.recursive(5));
+    }
+
+    @Test
+    void fibRecursive7() {
+        assertEquals(21, fibonacci.recursive(7));
+    }
+}

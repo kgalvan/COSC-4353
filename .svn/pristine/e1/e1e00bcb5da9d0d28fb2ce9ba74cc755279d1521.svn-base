@@ -1,0 +1,15 @@
+[Venkat 03/21/18 07:36 AM EDT]
+synopsis: gradlew is missing 
+
+details:                    
+
+Please notice that gradlew is missing in assign3 and that is needed to run the build on non-Windows.
+
+> ./gradlew
+-bash: ./gradlew: No such file or directory
+
+Remove all comments. Please take small steps. Design one function first, get that reviewed, then design another function after that.
+
+Give good variable names.
+
+------------------------------------------------------------------------------

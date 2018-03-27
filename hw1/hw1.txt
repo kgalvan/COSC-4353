@@ -1,0 +1,47 @@
+Please keep all files related to a homework or an assignment within the appropriate directory. Files checked in outside of specific homework or assignment directory will not be reviewed or graded for that homework/assignment.
+
+Check in and modify files as many times as you like. You will not be able to modify the files after the deadline.
+
+During pairing rotate who checks in the code. There should be somewhat (approximately) the same number of checkins from each member of a pair/team. In other words, we don't want to see check in from only one person of the pair/team.
+
+You will work as a pair, both of you are responsible for the completed work in all assignments and homework. Reasonable effort is expected from each person.
+
+The deadlines are strict, there will be no extensions. Don't email any code to Venkat or to the mailing list. Your last check in before the deadline will be graded. If your last check in breaks the code, both you and your pair will lose significant points.
+
+Please feel free to ask for frequent reviews. See the reviews/readme.txt file for details on how to ask for reviews.
+
+You can evolve the answers and solutions based on the reviews. Only the latest checkin at the time of review will be looked at. Also the final check in will be the only one graded.
+
+Please read the academic honesty policy posted on the course mailing list.
+
+Now to homework #1.
+
+------------------------------------------------------------------------------
+HW1: Due 11:59PM February 2
+
+1. According to the article <http://martinfowler.com/articles/designDead.html>
+is design really dead? Explain.
+
+
+No. Design is not dead but the author does point out that design has changed and many common design techniques are being ignored in favor of evolutionary design in XP. Rather than planned design or the evolutionary design in XP, the author suggests a mix between both leaning more towards evolutionary design. This involves tactics such as: keeping code simple and clean, refactoring only when you need it, using and evolving patterns, having insight for the future, and having proper communication.
+
+
+2. According to the article how should we approach design?
+
+
+The author of the article suggests that both planned and evolutionary design have their benefits and flaws. He suggests rather than taking an extreme stance with either one of these, a better form of design would be to take the emphasis on simplicity and refactoring from evolutionary design and the focus on design patterns and architecture from planned design and combining those with communication and awareness of future changes.
+
+
+
+3. What are some of the techniques that Martin Fowler recommends that we should follow?
+
+
+Again, design should be simple. The author also takes a stance against other supporters of XP by suggesting the use of software architecture as a way to establish a staring point. He also recommends the usage of diagrams--not for everything, but only for important things. These diagrams allow you to change your design earlier, rather than forcing a change when a problem arises in coding. He mentions patterns as a way to simplify design: just reuse what you already have. Other methods mentioned in the article include not adding anything unnecessary, having good communication between designers and programmers, and analyzing when your designs aren't doing what they're suppose to.
+
+Total [10]: -5
+
+Lacking in details and depth. By writing in short paragraphs we can focus on each through and bring out details, reasoning, observations, etc. Need to put in more effort to bring out various technical practices the author emphasizes in the article.
+
+The hw1 score has been updated at
+http://www2.cs.uh.edu/~svenkat/spring2018sd/scores.pdf.
+Please hit refresh on your browser to view the latest version instead of a cached version.

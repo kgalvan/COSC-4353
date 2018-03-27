@@ -1,0 +1,85 @@
+package mastermind;
+
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+import static mastermind.MasterMind.Response.*;
+
+public class MasterMind {
+    public int attempts = 20;   //Venkat: this should either be set to 0 or should be called attemptsLeft
+    
+    //Venkat: protected int attemptsLeft = 20;
+    
+    public String winner = "none"; //Venkat: Please remove
+    public boolean gameDone = false; //Venkat: Please remove
+    enum Response{ NO_MATCH, MATCH, POSITIONAL_MATCH }
+    
+    //Venkat: GameStatus { IN_PROGRESS, WON, LOST }
+    //private GameStatus gameStatus = GameStatus.IN_PROGRESS;
+
+    private final int SIZE = 6;
+    
+    private List<Color> solution;
+
+    public MasterMind()
+    {
+        for(int x = 0; x < 6; x++)
+            generateRandomColors();   
+            //Venkat: solution = generateRandomColors();
+    }
+
+    public MasterMind(List<Color> selection) {
+        solution = selection;
+    }
+
+    public Map<Response,Long> guess(List<Color> userGuess) {
+        IntFunction<Response> computeMatchAtPosition = index ->
+          solution.get(index) == userGuess.get(index) ? POSITIONAL_MATCH :
+            userGuess.contains(solution.get(index)) ? MATCH : NO_MATCH;
+
+        Map<Response, Long> response =
+          IntStream.range(0, SIZE)
+            .mapToObj(computeMatchAtPosition)
+            .collect(groupingBy(Function.identity(), counting()));
+
+        response.computeIfAbsent(NO_MATCH, key -> 0L);
+        response.computeIfAbsent(MATCH, key -> 0L);
+        response.computeIfAbsent(POSITIONAL_MATCH, key -> 0L);
+
+        status(response);
+        return response;
+    }
+
+    private void status (Map<Response, Long> response) { //Venkat: updateGameStatus(response)
+        attempts--; //Venkat: let's move this to guess
+
+        if (response.get(Response.POSITIONAL_MATCH) == 6 && !gameDone) {
+            winner = "Player";
+            gameDone = true;
+        }
+        else if (attempts == 0 && !gameDone) {
+            winner = "Game";
+            gameDone = true;
+        }
+        else if (gameDone) {
+            winner = "You already won";
+            attempts++;  //Venkat: Please remove
+        }
+    }
+
+    protected Color generateRandomColors() {   //Venkat: protected List<Color> generateRandomColors() 
+
+        Color[]allColorArray = new Color[]{Color.RED,Color.BLUE,Color.CYAN,Color.YELLOW,Color.GREEN,Color.ORANGE,Color.PINK,Color.MAGENTA,Color.BLACK,Color.GRAY};
+        //Venkat: Get the above list from a method getAvailableColors()
+        Collections.shuffle(Arrays.asList(allColorArray));
+        return allColorArray[0];
+    }    
+    
+    //Venkat: public GameStatus getGameStatus() { return gameStatus; }
+}

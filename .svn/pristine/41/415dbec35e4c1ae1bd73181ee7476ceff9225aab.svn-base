@@ -1,0 +1,212 @@
+package mastermind;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.lang.*;
+import java.util.Map;
+
+import mastermind.MasterMind.Response;
+
+public class MasterMindTest {
+    MasterMind mastermind;
+
+    @BeforeEach
+    void init() {
+        List<Color> selection = Arrays.asList(Color.RED, Color.GREEN, Color.BLACK, Color.WHITE, Color.BLUE, Color.CYAN);
+        mastermind = new MasterMind(selection);
+    }
+
+    @Test
+    void noCorrect() {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW);
+        Map<Response, Long> response = mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(new Long(0), response.get(Response.POSITIONAL_MATCH)),
+                () -> assertEquals(new Long(0), response.get(Response.MATCH)),
+                () -> assertEquals(new Long(6), response.get(Response.NO_MATCH)));
+    }
+
+    @Test
+    void oneCorrectWrongPosition() {
+        List<Color> userGuess = Arrays.asList(Color.BLUE, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW);
+        Map<Response, Long> response = mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(new Long(0), response.get(Response.POSITIONAL_MATCH)),
+                () -> assertEquals(new Long(1), response.get(Response.MATCH)),
+                () -> assertEquals(new Long(5), response.get(Response.NO_MATCH)));
+    }
+
+    @Test
+    void oneCorrectRightPosition() {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.BLUE, Color.YELLOW);
+        Map<Response, Long> response = mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(new Long(1), response.get(Response.POSITIONAL_MATCH)),
+                () -> assertEquals(new Long(0), response.get(Response.MATCH)),
+                () -> assertEquals(new Long(5), response.get(Response.NO_MATCH)));
+    }
+
+    @Test
+    void twoCorrectOneRightPosition() {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.RED, Color.YELLOW, Color.YELLOW, Color.BLUE, Color.YELLOW);
+        Map<Response, Long> response = mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(new Long(1), response.get(Response.POSITIONAL_MATCH)),
+                () -> assertEquals(new Long(1), response.get(Response.MATCH)),
+                () -> assertEquals(new Long(4), response.get(Response.NO_MATCH)));
+    }
+
+    @Test
+    void allCorrectRightPosition() {
+        List<Color> userGuess = Arrays.asList(Color.RED, Color.GREEN, Color.BLACK, Color.WHITE, Color.BLUE, Color.CYAN);
+        Map<Response, Long> response = mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(new Long(6), response.get(Response.POSITIONAL_MATCH)),
+                () -> assertEquals(new Long(0), response.get(Response.MATCH)),
+                () -> assertEquals(new Long(0), response.get(Response.NO_MATCH)));
+    }
+
+    @Test
+    void fourPositionMatchTwoColorMatch(){
+        List<Color> userGuess = Arrays.asList(Color.RED, Color.BLACK, Color.GREEN, Color.WHITE, Color.BLUE, Color.CYAN);
+        Map<Response, Long> response = mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(new Long(4), response.get(Response.POSITIONAL_MATCH)),
+                () -> assertEquals(new Long(2), response.get(Response.MATCH)),
+                () -> assertEquals(new Long(0), response.get(Response.NO_MATCH)));
+    }
+
+    @Test
+    void fourPositionMatchOneColorMatchOneNoMatch()
+    {
+        List<Color> userGuess = Arrays.asList(Color.RED, Color.GREEN, Color.BLACK, Color.RED, Color.WHITE, Color.CYAN);
+        Map<Response, Long> response = mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(new Long(4), response.get(Response.POSITIONAL_MATCH)),
+                () -> assertEquals(new Long(1), response.get(Response.MATCH)),
+                () -> assertEquals(new Long(1), response.get(Response.NO_MATCH)));
+    }
+
+    @Test
+    void SixColorMatch()
+    {
+        List<Color> userGuess = Arrays.asList(Color.CYAN, Color.BLUE, Color.WHITE, Color.GREEN, Color.BLACK, Color.RED);
+        Map<Response, Long> response = mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(new Long(0), response.get(Response.POSITIONAL_MATCH)),
+                () -> assertEquals(new Long(6), response.get(Response.MATCH)),
+                () -> assertEquals(new Long(0), response.get(Response.NO_MATCH)));
+    }
+    
+    @Test
+    void oneColorDuplicatedManyTimes()
+    {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED);
+        Map<Response, Long> response = mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(new Long(0), response.get(Response.POSITIONAL_MATCH)),
+                () -> assertEquals(new Long(1), response.get(Response.MATCH)),
+                () -> assertEquals(new Long(5), response.get(Response.NO_MATCH)));
+    }
+
+    @Test
+    void oneColorDuplicatedManyTimesWithPositionalMatch()
+    {
+        List<Color> userGuess = Arrays.asList(Color.RED, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED);
+        Map<Response, Long> response = mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(new Long(1), response.get(Response.POSITIONAL_MATCH)),
+                () -> assertEquals(new Long(0), response.get(Response.MATCH)),
+                () -> assertEquals(new Long(5), response.get(Response.NO_MATCH)));
+    }
+
+    @Test
+    void toSuppressCoverageIssueWithEnum(){    
+        Response.values();
+        Response.valueOf("NO_MATCH");
+
+        assertTrue(true);
+    }
+
+    @Test
+    void gameStatusAtStart() {
+        assertAll(
+                () -> assertEquals(20, mastermind.attempts),
+                () -> assertEquals("none", mastermind.winner));
+    }
+
+    @Test
+    void gameStatusAfterTwoGuesses() {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW);
+        mastermind.guess(userGuess);
+        mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(18, mastermind.attempts),
+                () -> assertEquals("none", mastermind.winner));
+    }
+
+    @Test
+    void gameStatusAfterAllCorrect() {
+        List<Color> userGuess = Arrays.asList(Color.RED, Color.GREEN, Color.BLACK, Color.WHITE, Color.BLUE, Color.CYAN);
+        Map<Response, Long> response = mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(19, mastermind.attempts),
+                () -> assertEquals("Player", mastermind.winner));
+    }
+
+    @Test
+    void gameStatusAfterTwentyGuesses() {
+        for (int i = 0; i < 20; i++) {
+            List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW);
+            mastermind.guess(userGuess);
+        }
+
+        assertAll(
+                () -> assertEquals(0, mastermind.attempts),
+                () -> assertEquals("Game", mastermind.winner));
+    }
+
+    @Test
+    void  gameStatusAfterGuessAfterWin () {
+        List<Color> userGuess = Arrays.asList(Color.RED, Color.GREEN, Color.BLACK, Color.WHITE, Color.BLUE, Color.CYAN);
+        mastermind.guess(userGuess);
+        mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(19, mastermind.attempts),
+                () -> assertEquals("You already won", mastermind.winner));
+    }
+
+    @Test
+    void gameStatusAfterWinOnTwentiethGuess () {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW);
+        for(int i = 0; i < 19; i++) {
+            mastermind.guess(userGuess);
+        }
+        userGuess = Arrays.asList(Color.RED, Color.GREEN, Color.BLACK, Color.WHITE, Color.BLUE, Color.CYAN);
+        mastermind.guess(userGuess);
+
+        assertAll(
+                () -> assertEquals(0, mastermind.attempts),
+                () -> assertEquals("Player", mastermind.winner));
+    }
+}

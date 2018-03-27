@@ -1,0 +1,24 @@
+[Venkat 02/08/18 06:38 AM EET]
+synopsis: please rework to appropriate level of detail and bring out design and reasoning 
+
+details:
+Diagram: missing, please provide.
+
+Text:
+
+1. Please write in short paragraphs with a blank line between paragraphs.
+
+Please write in short paragraphs. Set a bit of context here before discussing the design. For example, tell us what need to be modeled and then how it is modeled. Walk the reader through, so they know what you are doing, why you are doing, and how you are doing. Let's give names to the classes, they represent abstraction.
+
+By reading this part the reader should get an understanding of the main problem at hand, the areas of concern, the solutions, and the reasons for those solutions.
+
+In the text, refer to the diagram and discuss the parts of the diagram here, again in short paragraphs instead of bullets, numbered items, or one big paragraph.
+
+2.
+Please write in short paragraphs with a blank line between paragraphs.
+
+Things like "There would be 2 string arrays holding the names of the colors." should not be here. This section is about a very high level detail, language choice, library choices, etc.
+
+Some of the details presented here may have to be moved to part 1 and some should be removed since those details are not useful for the strategic design.
+
+------------------------------------------------------------------------------

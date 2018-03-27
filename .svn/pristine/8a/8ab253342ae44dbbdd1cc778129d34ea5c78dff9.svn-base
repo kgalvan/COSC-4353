@@ -1,0 +1,80 @@
+[Venkat 03/08/18 15:05 PM CET]
+synopsis: quite a bit of refactoring to do 
+
+details:                                  
+
+Please see suggestions in code.
+
+Let's proceed to create the UI (not GUI), a console program that will read a file, use the current code to select a word, scramble it... Please exclude the UI code from tests and coverage. Remember to change build.gradle to add runui task to run ui from command line (like in assign1).
+
+------------------------------------------------------------------------------
+[Venkat 03/06/18 10:54 AM CET]
+synopsis: let's refactor
+
+details:
+Please address and remove the review notes I leave in the code. My comments from previous review are still there in code.
+
+In GuessingGame, spellCheck and getSpellCheckURL should not be in this class. Right now this class has low cohesion, does more than its one responsibility,
+is tightly coupled to the URL, and fails the open closed principle.
+
+What to do?
+
+A separate class, SpellCheckerService implements SpellChecker.
+A separate test class SpellCheckerTest with tests for:
+send correct word, result should be true
+send word that has wrong spelling, result should be false
+test for network failure is handled properly.
+
+------------------------------------------------------------------------------
+[Venkat 03/02/18 07:56 AM CST]
+synopsis: not much progress since last review 
+
+details:
+Please address and remove the review notes I leave in the code. My comments from previous review are still there in code.
+
+Please see previous review for next tests to write.
+
+------------------------------------------------------------------------------
+[Venkat 03/01/18 02:25 AM MST]
+synopsis: good so far 
+
+details:             
+
+Please see suggestions in code.
+
+After making the changes, please proceed to designing tests for score when the given guess's spelling is correct. Then for when the given guess's spelling is incorrect.
+
+------------------------------------------------------------------------------
+[Venkat 02/28/18 05:55 AM MST]
+synopsis: red in coverage 
+
+details:
+
+Red in coverage, please see
+https://groups.google.com/d/msg/uhcss18sd/1QKkliwsSM4/0QTwFakTAAAJ
+
+------------------------------------------------------------------------------
+[Venkat 02/26/18 07:05 AM CST]
+synopsis: nice focus for the start 
+
+details:
+Please remove all commented out code.
+Please give one space after comma.
+
+I like your focus to start with - on the score. Good job.
+
+Once we start with a function's design, we stay with that function's design to complete that. So, let's keep our focus on getScore.
+
+Notice the field int score. That is state. We do not want to add state to objects unless we can't avoid it. Be very reluctant adding state.
+
+Let's delete all the code and rework the design.
+
+getScore can take two parameters: a scrambledWord and a guessWord.
+
+Let's pass a scrambledWord word, say oekmny. Let's pass an empty string for the guessWord. Assert score is 0. 
+
+Then let's write more tests for getScore. Let's keep our focus on only getScore.
+
+At this time in the design, we'll need one method getScore, no fields.
+
+------------------------------------------------------------------------------

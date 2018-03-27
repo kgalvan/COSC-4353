@@ -1,0 +1,36 @@
+package mastermind;
+
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class MasterMindTest {
+    @Test
+    public void Canary() {
+        assertTrue(true);
+    }
+    @Test
+    public void win()
+    {
+        MasterMind user = new MasterMind();
+        assertEquals("none",user.win());
+    }
+    @Test
+    public void generateSolution() //returns array full of zeros
+    {
+        MasterMind user = new MasterMind();
+        int testArray[] = user.generateSolution();
+        assertTrue(testArray!=null);
+    }
+    @Test
+    public void compare()
+    {
+        MasterMind user = new MasterMind();
+        int testArray[] = user.generateSolution();
+        int zeroArray[] = new int[6];
+        boolean same = user.compare(testArray,zeroArray);
+        assertEquals(true,same);
+    }
+}

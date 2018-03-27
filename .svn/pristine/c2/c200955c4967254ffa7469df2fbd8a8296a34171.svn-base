@@ -1,0 +1,39 @@
+package fibonacci;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public abstract class FibonacciSolutionTest<T extends FibonacciSolution> {
+    private T fibonacciSolution;
+
+    protected abstract T createInstance();
+
+    @BeforeEach
+    public void setUp() {
+        fibonacciSolution = createInstance();
+    }
+    @Test
+    void canaryTest() {
+        assertTrue(true);
+    }
+
+    @Test
+    void fibMultipleNumbers() {
+        assertAll(
+                () -> assertEquals("1", String.valueOf(fibonacciSolution.compute(0))),
+                () -> assertEquals("1", String.valueOf(fibonacciSolution.compute(1))),
+                () -> assertEquals("2", String.valueOf(fibonacciSolution.compute(2))),
+                () -> assertEquals("3", String.valueOf(fibonacciSolution.compute(3))),
+                () -> assertEquals("5", String.valueOf(fibonacciSolution.compute(4))),
+                () -> assertEquals("8", String.valueOf(fibonacciSolution.compute(5))),
+                () -> assertEquals("34", String.valueOf(fibonacciSolution.compute(8))),
+                () -> assertEquals("89", String.valueOf(fibonacciSolution.compute(10)))
+        );
+    }
+
+
+}

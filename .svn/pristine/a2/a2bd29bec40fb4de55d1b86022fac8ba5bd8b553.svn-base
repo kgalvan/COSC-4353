@@ -1,0 +1,44 @@
+Assign1: Due 11:59PM February 23
+
+***Your chance of success greatly increases if you start very early. Your chance of failure increases if you start late.
+
+Take small steps, ask for frequent reviews, make use of the daily reviews. You don't have to do anything big or special for review. Whatever you are able to do in a day, ask for that to be reviewed.
+
+Using Test First Development (no code without test first) implement the problem you designed in hw2. Feel free to evolve that design and use your judgment to make changes based on the improved understanding and learning.
+
+First start with a tests list and a canary test.
+
+After completing the assignment (and only after) answer the following questions:
+
+1. What did you learn mainly in this assignment?
+
+We learned that testing is crucial to development. The order in which we coded (classes and methods as opposed to UI first) was very useful. Playing around with UI might've resulted in a waste of time if we kept wanting to change differnt aspects. It was also much easier to refactor code this way, as we could see our methods slowly become more complex and more useful, as opposed to changing code to fit specific situations.
+
+We also learned that our design had the right concept, but a lot of the minor details were flawed. The class types, data types, what variables were needed, a lot of that was incorrect. We spent time trying to figure out what represented this or that, time that we didn't focus on functionality as much as we should have.
+
+2. How is your current design different, if at all, from the strategic design created in hw2?
+
+The step-by-step process remained very similar to how we described it. We used different objects and data structures, but the process in which the game plays out is the same. Some parts of design, such as our UML class diagram ended up having too many unused data types, some things were too specific(specifying buttons), others lacked detail(having just a boolean for win/lose and not an in between while playing).
+
+
+3. Were there any surprises or things you did not expect along the way? Any particular problem faced, things you had to tackle that you did not expect beforehand?
+
+No major problems, only unfamiliarity with test driven development. We had minor issues with early implementation, but with enough assistance and reviews, we ended up with a working game.
+
+Total [100]: 92
+Program runs [10]:
+
+Game works as expected [10]: -2
+	Choosing the color is not working as expected. It is not intuitive and also
+	  it is not working fluently like it should.
+
+All tests pass [20]:
+Test quality [15]:
+Test for randomness [5]:
+Code coverage [10]:
+Code quality [10]: -4
+GUI contains very long methods. As good practitioners in our field we should not do that.
+Commented out dead code, please remove them.
+
+Design quality [10]: -2
+Response to questions [10]:

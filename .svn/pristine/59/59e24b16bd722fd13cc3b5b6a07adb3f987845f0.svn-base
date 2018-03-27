@@ -1,0 +1,96 @@
+package mastermind;
+
+//import mastermind.MasterMind; //Venkat: Please remove
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals; //Venkat: Please move these two lines near other imports of junit
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class MasterMindTest {
+    MasterMind mastermind;
+
+    @BeforeEach
+    void init() {
+        List<Color> selection = Arrays.asList(Color.RED, Color.GREEN, Color.BLACK, Color.WHITE, Color.BLUE, Color.CYAN);
+        mastermind = new MasterMind(selection);
+    } //Venkat: Please give a blank line after this line
+    @Test
+    void noCorrect() {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW); //Venkat: one blank line after this
+        List<Color> returnList = mastermind.compare(userGuess);
+        List<Color> fail = null;
+
+
+        assertEquals(fail, returnList);  
+        
+        //Venkat: Lets' change this test
+        
+        /*
+        Map<Response, Integer> response = mastermind.guess(userGuess);
+        
+        assertEquals 0 for response.get(POSITIONAL_MATCH);
+        assertEquals 0 for response.get(MATCH);
+        assertEquals 6 for response.get(NO_MATCH);
+        
+        where Response is an enum with values NO_MATCH, MATCH and POSITIONAL_MATCH
+        */
+        
+    } //Venkat: one blank line after this
+    @Test
+    void oneCorrectWrongPosition() {
+        List<Color> userGuess = Arrays.asList(Color.BLUE, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW);
+        List<Color> returnList = mastermind.compare(userGuess);
+        List<Color> oneGray = new ArrayList<Color>();
+        oneGray.add(Color.GRAY);
+
+
+        assertEquals(oneGray, returnList);
+    }
+    @Test
+    void oneCorrectRightPosition() {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.BLUE, Color.YELLOW);
+        List<Color> returnList = mastermind.compare(userGuess);
+        List<Color> oneBlack = new ArrayList<Color>();
+        oneBlack.add(Color.BLACK);
+
+
+        assertEquals(oneBlack, returnList);
+    }
+    @Test
+    void twoCorrectOneRightPosition() {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.RED, Color.YELLOW, Color.YELLOW, Color.BLUE, Color.YELLOW);
+        List<Color> returnList = mastermind.compare(userGuess);
+        List<Color> oneBlackOneSilver = Arrays.asList(Color.BLACK, Color.GRAY);
+
+
+        assertEquals(oneBlackOneSilver, returnList);
+    }
+    @Test
+    void allCorrectRightPosition() {
+        List<Color> userGuess = Arrays.asList(Color.RED, Color.GREEN, Color.BLACK, Color.WHITE, Color.BLUE, Color.CYAN);
+        List<Color> returnList = mastermind.compare(userGuess);
+        List<Color> allBlack = Arrays.asList(Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK);
+
+
+        assertEquals(allBlack, returnList);
+    }
+    
+    //Venkat: Let's write a few more tests:
+    /*
+    Let's assume P1, P2, P3, P4, P5, P6 are colors passed to the constructor (that is they are the selection).
+
+    Let's write the following tests for user input:
+
+    1. P1, P3, P2, P4, P5, P6
+
+    2. P1, P2, P3, P1, P4, P6
+
+    3. P6, P5, P4, P1, P2, P1
+    */
+}

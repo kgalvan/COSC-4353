@@ -1,0 +1,29 @@
+package guessinggame;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class GuessingGameTest{
+    GuessingGame guessingGame = new GuessingGame();
+
+    @Test
+    void Canary(){
+        assertTrue(true);
+    }
+
+    @Test
+    void showUserScore(){
+        assertEquals(0,guessingGame.printScore());
+    }
+
+    @Test
+    void showProgramGeneratedShuffledWord(){
+        assertEquals("Monkey",guessingGame.shuffleWord());
+    }
+
+    @Test
+    void addOnePointToScore(){
+        guessingGame.addPoint();
+        assertEquals(1,guessingGame.printScore());
+    }
+}

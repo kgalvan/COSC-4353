@@ -1,0 +1,63 @@
+[Reviewed 03/26/18 05:59 AM PDT]
+synopsis: let's refactor and then move forward 
+
+details:                                      
+
+Please see suggestions in code.
+
+Let's write a new test class for Memoization performance. In this test, let's call recursive solution for position 25, then memoized solution for position 25. Compare the time and assert that the difference is at least one order of magnitude.
+
+------------------------------------------------------------------------------
+[Venkat 03/25/18 07:10 AM PDT]
+synopsis: let's reduce noise 
+
+details:                    
+
+Please see suggestions in code.
+
+After that, please move to the memoized solution
+
+------------------------------------------------------------------------------
+[Venkat 03/24/18 04:41 AM MDT]
+synopsis: let's keep it DRY 
+
+details:                   
+
+Please see suggestions in code.
+
+------------------------------------------------------------------------------
+[Venkat 03/23/18 05:57 AM PDT]
+synopsis: let's add another test 
+
+details:                        
+
+Please see suggestions in code.
+
+Then move to the next small step after that.
+
+------------------------------------------------------------------------------
+[Venkat 03/22/18 07:56 AM EDT]
+synopsis: please check the coverage 
+
+details:
+
+The coverage report is not showing coverage for the class. Please fix it or ask for help.
+
+Please see suggestions in code. Let's fix these and get another review before moving forward.
+
+------------------------------------------------------------------------------
+[Venkat 03/21/18 07:36 AM EDT]
+synopsis: gradlew is missing 
+
+details:                    
+
+Please notice that gradlew is missing in assign3 and that is needed to run the build on non-Windows.
+
+> ./gradlew
+-bash: ./gradlew: No such file or directory
+
+Remove all comments. Please take small steps. Design one function first, get that reviewed, then design another function after that.
+
+Give good variable names.
+
+------------------------------------------------------------------------------

@@ -1,0 +1,7 @@
+package guessinggame;
+
+import java.io.IOException;
+
+public interface SpellChecker {
+    public boolean isSpellingCorrect(String userInput) throws IOException;
+}

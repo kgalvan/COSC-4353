@@ -1,0 +1,47 @@
+package fibonacci;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class FibonacciIterativeSolutionTest {
+    private FibonacciIterativeSolution fibonacciIterativeSolution;
+
+     @BeforeEach
+     void init(){
+         fibonacciIterativeSolution = new FibonacciIterativeSolution();
+     }
+
+    @Test
+    void canaryTest() {
+        assertTrue(true);
+    }
+
+    @Test
+    void fibIterativeMultipleNumbers() {
+        assertAll(
+            () -> assertEquals("1", String.valueOf(fibonacciIterativeSolution.compute(0))),
+            () -> assertEquals("1", String.valueOf(fibonacciIterativeSolution.compute(1))),
+            () -> assertEquals("2", String.valueOf(fibonacciIterativeSolution.compute(2))),
+            () -> assertEquals("3", String.valueOf(fibonacciIterativeSolution.compute(3))),
+            () -> assertEquals("5", String.valueOf(fibonacciIterativeSolution.compute(4))),
+            () -> assertEquals("8", String.valueOf(fibonacciIterativeSolution.compute(5))),
+            () -> assertEquals("34", String.valueOf(fibonacciIterativeSolution.compute(8))),
+            () -> assertEquals("89", String.valueOf(fibonacciIterativeSolution.compute(10)))
+        );
+    }
+
+    @Test
+    void fibIterative50(){
+         assertEquals("20365011074", String.valueOf(fibonacciIterativeSolution.compute(50)));
+    }
+
+    @Test
+    void simpleIterationForPosition300(){
+        assertEquals("359579325206583560961765665172189099052367214309267232255589801", 
+            String.valueOf(fibonacciIterativeSolution.compute(300)));
+    }
+}

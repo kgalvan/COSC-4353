@@ -1,0 +1,138 @@
+package mastermind;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.lang.*;
+import java.util.Map;
+
+import mastermind.MasterMind.Response;
+
+public class MasterMindTest {
+    MasterMind mastermind;
+
+    @BeforeEach
+    void init() {
+        List<Color> selection = Arrays.asList(Color.RED, Color.GREEN, Color.BLACK, Color.WHITE, Color.BLUE, Color.CYAN);
+        mastermind = new MasterMind(selection);
+    }
+
+    @Test
+    void noCorrect() {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW);
+
+        Map<Response, Integer> response = mastermind.guess(userGuess);
+//Venkat: need one blank line before assert starts. AAA - please see mailing list about AAA
+        assertEquals(new Integer(0), response.get(Response.POSITIONAL_MATCH));
+        assertEquals(new Integer(0), response.get(Response.MATCH));
+        assertEquals(new Integer(6), response.get(Response.NO_MATCH));
+
+        //Venkat: no need for new Integer(6), instead
+        //assertEquals(6, (int) response.get(Response.NO_MATCH));
+        
+        
+        //Venkat: Please see reviews file for why the above should change to the below:
+        //assertAll(
+        //  () -> assertEquals(0, (int) response.get(Response.POSITIONAL_MATCH)),
+        //  () -> assertEquals(0, (int) response.get(Response.MATCH)),
+        //  () -> assertEquals(6, (int) response.get(Response.NO_MATCH)));
+    } //Venkat: one blank line after this please
+    @Test
+    void oneCorrectWrongPosition() {
+        List<Color> userGuess = Arrays.asList(Color.BLUE, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW);
+
+        Map<Response, Integer> response = mastermind.guess(userGuess);
+        assertEquals(new Integer(0), response.get(Response.POSITIONAL_MATCH));
+        assertEquals(new Integer(1), response.get(Response.MATCH));
+        assertEquals(new Integer(5), response.get(Response.NO_MATCH));
+    }
+    @Test
+    void oneCorrectRightPosition() {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.YELLOW, Color.BLUE, Color.YELLOW);
+
+        Map<Response, Integer> response = mastermind.guess(userGuess);
+        assertEquals(new Integer(1), response.get(Response.POSITIONAL_MATCH));
+        assertEquals(new Integer(0), response.get(Response.MATCH));
+        assertEquals(new Integer(5), response.get(Response.NO_MATCH));
+    } //Venkat: Please give one blank line betweeen each method
+    @Test
+    void twoCorrectOneRightPosition() {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.RED, Color.YELLOW, Color.YELLOW, Color.BLUE, Color.YELLOW);
+
+        Map<Response, Integer> response = mastermind.guess(userGuess);
+        assertEquals(new Integer(1), response.get(Response.POSITIONAL_MATCH));
+        assertEquals(new Integer(1), response.get(Response.MATCH));
+        assertEquals(new Integer(4), response.get(Response.NO_MATCH));
+    }
+    @Test
+    void allCorrectRightPosition() {
+        List<Color> userGuess = Arrays.asList(Color.RED, Color.GREEN, Color.BLACK, Color.WHITE, Color.BLUE, Color.CYAN);
+
+        Map<Response, Integer> response = mastermind.guess(userGuess);
+        assertEquals(new Integer(6), response.get(Response.POSITIONAL_MATCH));
+        assertEquals(new Integer(0), response.get(Response.MATCH));
+        assertEquals(new Integer(0), response.get(Response.NO_MATCH));
+    }
+
+    @Test
+    void testCaseOne(){
+        List<Color> userGuess = Arrays.asList(Color.RED, Color.BLACK, Color.GREEN, Color.WHITE, Color.BLUE, Color.CYAN);
+
+        Map<Response, Integer> response = mastermind.guess(userGuess);
+        assertEquals(new Integer(4), response.get(Response.POSITIONAL_MATCH));
+        assertEquals(new Integer(2), response.get(Response.MATCH));
+        assertEquals(new Integer(0), response.get(Response.NO_MATCH));
+    }
+    @Test
+    void testCaseTwo()
+    {
+        List<Color> userGuess = Arrays.asList(Color.RED, Color.GREEN, Color.BLACK, Color.RED, Color.WHITE, Color.CYAN);
+        Map<Response, Integer> response = mastermind.guess(userGuess);
+        assertEquals(new Integer(4), response.get(Response.POSITIONAL_MATCH));
+        assertEquals(new Integer(1), response.get(Response.MATCH));
+        assertEquals(new Integer(1), response.get(Response.NO_MATCH));
+    }
+    @Test
+    void testCaseThree()
+    {
+        List<Color> userGuess = Arrays.asList(Color.CYAN, Color.BLUE, Color.WHITE, Color.GREEN, Color.BLACK, Color.RED);
+        Map<Response, Integer> response = mastermind.guess(userGuess);
+        assertEquals(new Integer(0), response.get(Response.POSITIONAL_MATCH));
+        assertEquals(new Integer(6), response.get(Response.MATCH));
+        assertEquals(new Integer(0), response.get(Response.NO_MATCH));
+    }
+    
+    @Test
+    void oneColorDuplicatedManyTimes()
+    {
+        List<Color> userGuess = Arrays.asList(Color.YELLOW, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED);
+        Map<Response, Integer> response = mastermind.guess(userGuess);
+        assertEquals(new Integer(0), response.get(Response.POSITIONAL_MATCH));
+        assertEquals(new Integer(1), response.get(Response.MATCH));
+        assertEquals(new Integer(5), response.get(Response.NO_MATCH));
+    }
+
+    @Test
+    void oneColorDuplicatedManyTimesWithPositionalMatch()
+    {
+        List<Color> userGuess = Arrays.asList(Color.RED, Color.RED, Color.RED, Color.RED, Color.RED, Color.RED);
+        Map<Response, Integer> response = mastermind.guess(userGuess);
+        assertEquals(new Integer(1), response.get(Response.POSITIONAL_MATCH));
+        assertEquals(new Integer(0), response.get(Response.MATCH));
+        assertEquals(new Integer(5), response.get(Response.NO_MATCH));
+    }
+
+    @Test
+    void toSuppressCoverageIssueWithEnum(){    
+      Response.values();
+      Response.valueOf("NO_MATCH");
+      assertTrue(true);
+    }
+    
+}

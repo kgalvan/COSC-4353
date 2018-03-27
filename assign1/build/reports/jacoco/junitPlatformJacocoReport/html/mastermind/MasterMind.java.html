@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MasterMind.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">assign1</a> &gt; <a href="index.source.html" class="el_package">mastermind</a> &gt; <span class="el_source">MasterMind.java</span></div><h1>MasterMind.java</h1><pre class="source lang-java linenums">package mastermind;
+
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
+import static mastermind.MasterMind.Response.*;
+
+public class MasterMind {
+
+<span class="fc" id="L16">    protected int attemptsLeft = 20;</span>
+
+<span class="fc" id="L18">    public enum Response{ NO_MATCH, MATCH, POSITIONAL_MATCH }</span>
+<span class="fc" id="L19">    public enum GameStatus { IN_PROGRESS, WON, LOST }</span>
+
+<span class="fc" id="L21">    private GameStatus gameStatus = GameStatus.IN_PROGRESS;</span>
+<span class="fc" id="L22">    private final int SIZE = 6;</span>
+    private List&lt;Color&gt; solution;
+
+<span class="fc" id="L25">    public MasterMind() {</span>
+<span class="fc" id="L26">        solution = generateRandomColors();</span>
+
+        //Color randomColor
+        //Color randomColor;
+        //solution = new ArrayList&lt;Color&gt;();
+        //gameStatus = GameStatus.IN_PROGRESS;
+        //for (int x = 0; x &lt; 6; x++) {
+        // randomColor = generateRandomColors();
+        // solution.add(randomColor); }
+
+<span class="fc" id="L36">    }</span>
+
+<span class="fc" id="L38">    public MasterMind(List&lt;Color&gt; selection) {</span>
+<span class="fc" id="L39">        solution = selection;</span>
+<span class="fc" id="L40">    }</span>
+
+    public Map&lt;Response,Long&gt; guess(List&lt;Color&gt; userGuess) {
+<span class="fc" id="L43">        IntFunction&lt;Response&gt; computeMatchAtPosition = index -&gt;</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">          solution.get(index) == userGuess.get(index) ? POSITIONAL_MATCH :</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            userGuess.contains(solution.get(index)) ? MATCH : NO_MATCH;</span>
+
+<span class="fc" id="L47">        Map&lt;Response, Long&gt; response =</span>
+<span class="fc" id="L48">          IntStream.range(0, SIZE)</span>
+<span class="fc" id="L49">            .mapToObj(computeMatchAtPosition)</span>
+<span class="fc" id="L50">            .collect(groupingBy(Function.identity(), counting()));</span>
+
+<span class="fc" id="L52">        response.computeIfAbsent(NO_MATCH, key -&gt; 0L);</span>
+<span class="fc" id="L53">        response.computeIfAbsent(MATCH, key -&gt; 0L);</span>
+<span class="fc" id="L54">        response.computeIfAbsent(POSITIONAL_MATCH, key -&gt; 0L);</span>
+
+<span class="fc" id="L56">        attemptsLeft--;            </span>
+
+<span class="fc" id="L58">        updateGameStatus(response);</span>
+
+<span class="fc" id="L60">        return response;</span>
+    }
+
+    private void updateGameStatus (Map&lt;Response, Long&gt; response) {
+        /*
+        if (response.get(Response.POSITIONAL_MATCH) == 6 &amp;&amp; gameStatus == GameStatus.IN_PROGRESS) {
+            gameStatus = GameStatus.WON;
+        }
+        else if (attemptsLeft == 0) {
+            gameStatus = GameStatus.LOST;
+        }
+       */
+<span class="fc bfc" id="L72" title="All 2 branches covered.">       if(gameStatus != GameStatus.IN_PROGRESS) return;</span>
+
+<span class="fc bfc" id="L74" title="All 2 branches covered.">       if(response.get(Response.POSITIONAL_MATCH) == 6) {</span>
+           //if(gameStatus!=GameStatus.LOST)
+<span class="fc" id="L76">                gameStatus = GameStatus.WON;</span>
+       }
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if(attemptsLeft == 0) {</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">           if(gameStatus!=GameStatus.WON)</span>
+<span class="fc" id="L80">            gameStatus = GameStatus.LOST;</span>
+        }
+<span class="fc" id="L82">    }</span>
+
+    public List&lt;Color&gt; getAvailableColors() {
+<span class="fc" id="L85">        List&lt;Color&gt; allColorList = Arrays.asList(Color.RED,Color.BLUE,Color.CYAN,Color.YELLOW,Color.GREEN,Color.ORANGE,Color.PINK,Color.MAGENTA,Color.BLACK,Color.GRAY);</span>
+
+<span class="fc" id="L87">        return allColorList;</span>
+    }
+
+    protected List&lt;Color&gt; generateRandomColors() {
+
+<span class="fc" id="L92">        List&lt;Color&gt; allColorList = getAvailableColors();</span>
+<span class="fc" id="L93">        Collections.shuffle(allColorList);</span>
+<span class="fc" id="L94">        return allColorList;</span>
+
+        //        List&lt;Color&gt; allColorList = getAvailableColors();
+        //        Collections.shuffle(allColorList);
+        //        return allColorList.get(0);
+    }
+
+<span class="fc" id="L101">    public List&lt;Color&gt; getSolution() { return solution; }</span>
+
+<span class="fc" id="L103">    public GameStatus getGameStatus() {return gameStatus;}</span>
+
+<span class="fc" id="L105">    public int getAttemptsLeft() {return attemptsLeft;}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

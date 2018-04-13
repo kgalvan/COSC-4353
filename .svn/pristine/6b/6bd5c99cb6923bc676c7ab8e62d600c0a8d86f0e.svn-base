@@ -1,0 +1,20 @@
+package characterprocessor;
+
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class CharacterProcessorTest {
+    @Test
+    void Canary() {
+        assertTrue(true);
+    }
+
+    @Test
+    void ConvertsCharacterToUpper() {
+        CharacterProcessor charProcessor = new CharacterProcessor();
+
+        assertEquals("E", charProcessor.upperCaseConverter("e"));
+    }
+}

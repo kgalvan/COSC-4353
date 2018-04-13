@@ -1,0 +1,58 @@
+HW3: Due 11:59PM April 6
+
+Provide a collective response, but where needed, feel free to mention your name to outline your own personal experience that may be different from that of your partner.
+                        
+1. Why is quality of code important when developing software?
+
+	When developing software, it is important to have good code quality because it makes it easy to maintain and reuse. As a result, you can save time, money and effort.
+	When code quality is good, less time is used on having to go back and correct mistakes or bugs. Good code quality also implies reduced repetition which also saves time. Less time is spent on reviewing code when it is easily understandable.
+	Since less time is spent correcting errors, writing duplicate code, and reviewing, less resources are spent to fund these tasks that are made unnecessary with good code quality.
+	Less time and money spent also implies less effort done. When code quality is good, it is easier to maintain and reuse code. Reviewing code and adding features becomes easier when code is easier to understand. 
+
+
+2. What has been your prior experience (in other classwork you may have done and/or projects in the industry) with quality of code of the teams or people you have worked with/observed?
+
+Anthony: I often make mistakes with not focusing on certain methods and functions and jumping around to do other things. I also don't use the most descriptive variable/method names possible.
+I have also seen other examples of low quality code in real projects: using 'this' too much and having jumps that confuse outsiders looking at code. 
+
+Kristian: Previously, when working in groups, my partners and I have generally worked on almost entirely different parts of the project where our code never really overlaps.
+In the cases that our code might interact, we would work together in person where we could discuss and describe what our code does. It's generally not self-explanatory.
+
+3. Mention seven examples of poor quality you have seen in the past. Provide details on the consequences of each one of them. Then provide suggestions about what to improve, what to avoid, etc.
+
+	1. Not using self-descriptive variables. In the assign3, we used a, b, and n for variables for part of the fibonacci code. While we know that int n is the position of the number you want to find, it's better to be more descriptive and say int position instead of int n.
+	
+	2. Having too much in one class. In assign2, we initially put the SpellChecker in the Guess class. This was bad because they should've been seperate classes due to low cohesion with each other. Seperating them made more sense and allowed for the classes to be much cleaner.
+	
+	3. Reusing code. In assign3, we made the mistake of repeating codes for multiple tests, when we could've used an abstract class/interface with defaulted methods. We fixed our code implementing an interface so we didn't copy and paste tests for each fibonacci method.
+	
+	4. Starting with the GUI. In assign1, we had an outline of what we wanted the GUI to look like, and we had that done (but not committed) before we even started on program functionality. This is bad because this would've likely caused us to design as we go, as oppose to following a set design and creating a UI that fit with the design.
+	
+	5. Variation of tests. In assign2, we opted to have many tests for checking the score of a scrambled word, an excessive amount. We tested every individual vowel, multiple different letter combinations and unnecessary tests for if words passed a spellcheck. This was a waste of time and not necessary, as we had a sufficient amount of quality tests that we bogged down with more tests just to have more code to present.
+	
+	6. Being too concrete. In both assign2 and assign3 we opted against using an interface initially, and instead had concrete classes that ended up repeating code and overflowing classes.
+	
+	7. YAGNI. In all three assignments, we got ahead of ourselves with our code. Instead of focusing on a particular method, we had code or pseudo code of other methods that had no reason to be included yet. An example is working on a method to spellcheck or scramble words when the basic score function wasn't working correctly in assign2. Instead of working too far ahead, we should've focused on improving what needs to be improved, or following YAGNI.
+
+4. What design principles did you use in assignment 3?
+	1. Single responsibility principle: We had single responsibility classes in the 3 different fibonacci computations. Between IterativeFibonacciSolution, RecursiveFibonacciSolution, and MemoizedFibonacciSolution, each solved the Fibonacci sequence in a different way. None overlapped.
+	
+	2. Open Closed Principle: We had an interface for the test class for all 3 computations where they all had to have one test case in common. The iterative and memoized classes had separate tests and were able to added onto in their own class. FibonacciSolutionTest implemented the test that all test classes had in common and FibonacciIterativeSolutionTest and FibonacciMemoizedRecursiveSolutionTest added to that with their own specific tests.
+
+	3. Liskov Substitution Principle: We used polymorphism in the FibonacciSolutionTest class. In order to run all classes through the same test without repeating code, we passed a FibonacciSolution object into the test in that class and in each of the more specific test classes we passed FibonacciIterativeSolution, FibonacciRecursiveSolution, and FibonacciMemoizedRecursiveSolution into it.
+	
+	4. Acyclic Dependency Principle: We had no classes that depended on each other in a cycle.
+
+	5. Stable Abstraction Principle: We have three classes (FibonacciIterativeSolution, FibonacciRecursiveSolution, and FibonacciMemoizedRecursiveSolution) that all depend on an interface which is more stable than an abstract class and is therefore stable. The same applies to the test classes.
+
+	6. Stable Dependency Principle: We have many classes depending on a single interface, which is more stable. Since the interface is more stable and the many classes depend on the single interface, then dependency runs in the direction of stability and as a result, the code follows the Stable Dependency Principle.
+
+	7. Dependency inversion principle: The high level modules (IterativeFibonacciSolution, RecursiveFibonacciSolution, and MemoizedFibonacciSolution classes) did not depend on low-level modules, but rather abstraction (FibonacciSolution interface)
+
+5. What design patterns did you use in assignment 3?
+
+	Creational: Used the factory method by having FibonacciSolution objects that are instantiated by IterativeFibonacciSolution, RecursiveFibonacciSolution, and MemoizedFibonacciSolution classes in the FibonacciMemoizedPerformanceTest class.		
+
+Total [10]: -1
+
+In 5, need clarity on who the pattern is used. It is the tests that use the pattern, by having an abstract method in the base test and the derived tests providing concrete implementations.

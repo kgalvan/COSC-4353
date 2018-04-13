@@ -1,8 +1,0 @@
-package fibonacci;
-
-public class FibonacciMemoizedRecursiveSolutionTest extends FibonacciSolutionTest {
-    @Override
-    protected FibonacciSolution createInstance() {
-        return new FibonacciMemoizedRecursiveSolution();
-    }
-}

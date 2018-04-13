@@ -1,0 +1,35 @@
+[Reviewed 04/13/18 06:35 AM MDT]
+synopsis: let's move forward 
+
+details:                    
+
+Please move forward to the next small step.
+
+------------------------------------------------------------------------------
+[Reviewed 04/12/18 05:26 AM EDT]
+synopsis: the build is not running any tests 
+
+details:
+> ./gradlew
+
+> Task :help 
+
+Welcome to Gradle 4.4.
+
+To run a build, run gradlew <task> ...
+
+To see a list of available tasks, run gradlew tasks
+
+To see a list of command-line options, run gradlew --help
+
+To see more detail about a task, run gradlew help --task <task>
+
+------------------------------------------------------------------------------
+[Reviewed 04/11/18 09:07 AM EDT]
+synopsis: please integrate with CI 
+
+details:                          
+
+Please integrate code with CI build.
+
+------------------------------------------------------------------------------

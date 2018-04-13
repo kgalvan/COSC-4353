@@ -1,3 +1,0 @@
-cd assign2
-call gradlew.bat
-exit %ERRORLEVEL%

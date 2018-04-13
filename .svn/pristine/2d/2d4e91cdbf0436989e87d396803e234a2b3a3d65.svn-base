@@ -1,0 +1,7 @@
+package characterprocessor;
+
+public class CharacterProcessor {
+    public String upperCaseConverter(String characters) {
+        return characters.toUpperCase();
+    }
+}

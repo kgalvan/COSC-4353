@@ -1,0 +1,64 @@
+[Reviewed 04/05/18 09:15 AM EDT]
+synopsis: revisit 4 and 5 
+
+details:
+4.
+
+DIP?
+
+5.
+Envoke is not an English word. Not sure what were trying to say.
+Did we mean used, if so then "used" is a nice word to use.
+
+What objects are being created by these three classes? Revisit to identify where the pattern is really used in the assignment.
+
+------------------------------------------------------------------------------
+[Reviewed 04/04/18 15:12 PM IST]
+synopsis: a few things to improve 
+
+details:
+1.
+Good
+
+2.
+Good
+
+4.
+More principles...
+
+5.
+
+We are not using compose method pattern, please remove.
+
+Please check spelling.
+
+We can remove the last two paragraphs.
+
+------------------------------------------------------------------------------
+[Reviewed 04/03/18 23:06 PM IST]
+synopsis: good start 
+
+details:
+Please see [part](change) suggestion in text.
+
+1.
+Please write in short paragraphs. Start with an introductory paragraph. Then, in each short paragraph, discuss one strategic reason at a time.
+
+2.
+
+The second paragraph needs rephrasing, the sentence is currently awkward.
+
+Need response from the other partner.
+
+3.
+Good
+
+4.
+Please rework each paragraph, breath some reasons into it, explain how these principles are used, mention classes, interface, and the benefits. Right now a few are poorly worded and a few are rather incorrect.
+
+More principles... missing a few key ones.
+
+5.
+Abstraction is not a design patter. Please rework this part. Testing is not a design pattern either.
+
+------------------------------------------------------------------------------
